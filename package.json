@@ -1,0 +1,133 @@
+{
+    "name": "tailwind-drakmode-menu",
+    "version": "1.0.0",
+    "description": "UI library for theme, foundation, elements & components built with Tailwind CSS",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "lib",
+        "dist",
+        "styles/*.js",
+        "@types",
+        "README.md"
+    ],
+    "scripts": {
+        "prebuild": "rimraf dist lib && npm run build:ts",
+        "build:ts": "tsc --declaration --declarationMap --emitDeclarationOnly",
+        "build:tailwind": "tailwind build styles/tailwind.css -o styles/output.css -c styles/tailwind.config.js",
+        "build:tailwind-dev": "cross-env TAILWIND_MODE=build NODE_ENV=development npm run build:tailwind",
+        "build:tailwind-prod": "cross-env TAILWIND_MODE=build NODE_ENV=production npm run build:tailwind",
+        "watch:tailwind": "cross-env TAILWIND_MODE=watch NODE_ENV=development tailwind build styles/tailwind.css -o styles/output.css -c styles/tailwind.config.js --watch",
+        "build": "webpack",
+        "lint": "eslint --ext .js,.jsx,.ts,.tsx src/",
+        "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix src/",
+        "prettier": "prettier --config .prettierrc.js --write @types/ \"src/**/*.{js,jsx,ts,tsx}\"",
+        "formatter": "npm run prettier && npm run lint:fix",
+        "prestorybook": "npm run build:tailwind-dev",
+        "storybook": "start-storybook -p 3006",
+        "storybook:watch-css": "concurrently \"npm run storybook\" \"npm run watch:tailwind\"",
+        "prebuild-storybook": "npm run build:tailwind-prod",
+        "build-storybook": "build-storybook",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:coverage": "jest --coverage",
+        "prepare": "husky install"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged && npm test"
+        }
+    },
+    "lint-staged": {
+        "src/**/*.(ts|tsx|css)": [
+            "prettier --write"
+        ]
+    },
+    "author": "Jithender",
+    "peerDependencies": {
+        "react": ">=17.0.1",
+        "react-dom": ">=17.0.1",
+        "tailwindcss": ">=2.0.4",
+        "react-router-dom": ">=6.3.0"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.13.10",
+        "@babel/core": "^7.13.10",
+        "@babel/preset-env": "^7.13.10",
+        "@babel/preset-react": "^7.12.13",
+        "@babel/preset-typescript": "^7.13.0",
+        "@storybook/addon-actions": "^6.1.21",
+        "@storybook/addon-essentials": "^6.2.9",
+        "@storybook/addon-links": "^6.1.21",
+        "@storybook/addons": "^6.1.21",
+        "@storybook/react": "^6.2.9",
+        "@storybook/theming": "^6.1.21",
+        "@tailwindcss/forms": "^0.5.1",
+        "@testing-library/dom": "^8.13.0",
+        "@testing-library/jest-dom": "^5.16.4",
+        "@testing-library/react": "^12.1.5",
+        "@testing-library/react-hooks": "^8.0.0",
+        "@testing-library/user-event": "^14.2.0",
+        "@types/classnames": "^2.2.11",
+        "@types/jest": "^26.0.21",
+        "@types/lodash": "^4.14.168",
+        "@types/react": "^17.0.3",
+        "@types/react-dom": "^17.0.2",
+        "@types/tailwindcss": "^3.0.10",
+        "autoprefixer": "^10.4.7",
+        "babel-loader": "^8.2.2",
+        "concurrently": "^6.2.0",
+        "cross-env": "^7.0.3",
+        "css-loader": "^5.1.3",
+        "eslint": "^7.26.0",
+        "eslint-config-prettier": "^8.1.0",
+        "eslint-config-standard": "^16.0.2",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-prettier": "^3.3.1",
+        "eslint-plugin-promise": "^4.3.1",
+        "eslint-plugin-react": "^7.22.0",
+        "eslint-plugin-standard": "^5.0.0",
+        "html-webpack-plugin": "^5.3.1",
+        "husky": "^5.2.0",
+        "jest": "^26.6.3",
+        "jest-canvas-mock": "^2.3.1",
+        "jest-dom": "^4.0.0",
+        "license-report": "^5.0.2",
+        "lint-staged": "^10.5.4",
+        "postcss": "^8.4.13",
+        "prettier": "^2.2.1",
+        "react": "^17.0.2",
+        "react-docgen": "^5.3.1",
+        "react-docgen-typescript": "^1.21.0",
+        "react-dom": "^17.0.2",
+        "react-router-dom": "^6.3.0",
+        "storybook-addon-pseudo-states": "^1.9.0",
+        "style-loader": "^2.0.0",
+        "tailwindcss": "^3.1.3",
+        "ts-jest": "^26.5.4",
+        "ts-loader": "^8.0.18",
+        "typescript": "^4.2.3",
+        "webpack": "^5.26.3",
+        "webpack-bundle-analyzer": "^4.4.0",
+        "webpack-cli": "^4.5.0"
+    },
+    "dependencies": {
+        "@headlessui/react": "^1.6.4",
+        "@popperjs/core": "^2.11.5",
+        "classnames": "^2.2.6",
+        "deepmerge": "^4.2.2",
+        "downshift": "^6.1.3",
+        "lodash": "^4.17.21",
+        "react-popper": "^2.3.0"
+    },
+    "babel": {
+        "presets": [
+            "@babel/preset-env",
+            "@babel/preset-react"
+        ]
+    },
+    "engines": {
+        "node": ">=12.14.0"
+    }
+}
